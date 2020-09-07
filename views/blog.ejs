@@ -8,13 +8,22 @@
                     <div class="card-body">
                         <h5 class="card-title"><%= blog.title %></h5>
                         <p class="card-text"><%= blog.body %></p>
+                        <a href="javascript:history.go(-1)" class="btn btn-secondary">Back</a>
                         <a href="/blogs/edit/<%= blog.id %>" class="btn btn-info">Edit</a>
-                        <form action="/blogs/<%= blog.id %>?_method=DELETE" method="POST" class="d-inline">
+                        <form onsubmit="return checkDelete()" action="/blogs/<%= blog.id %>?_method=DELETE" method="POST" class="d-inline">
                             <button type="submit" class="btn btn-danger">Delete</button>
                         </form>
                     </div>
                 </div>
             <%- include('footer') %>
         </div>
+        <script>
+            function checkDelete() {
+                if( confirm("Are you sure you want to delete this post?") ) {
+                    return true;
+                }
+                return false;
+            }
+        </script>
     </body>
 </html>
